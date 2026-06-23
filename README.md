@@ -1,53 +1,67 @@
 # PulseDesk API
 
-API backend para gestao de incidentes, tickets e SLA. O projeto foi desenhado para mostrar engenharia de software aplicada em um contexto real de suporte operacional.
+API backend para gestao de incidentes, tickets e SLA.
 
-## Problema que resolve
-- centraliza incidentes e chamados
-- classifica prioridade e risco
-- ajuda a acompanhar SLA e atraso
-- cria base para auditoria e dashboard operacional
+## Objetivo
+Centralizar chamados operacionais e dar visibilidade de prioridade, atraso e risco para suportar tomada de decisao em ambientes de suporte e engenharia.
+
+## Problema atendido
+- chamados chegam por canais dispersos
+- prioridades ficam subjetivas
+- SLA nao e acompanhado de forma consistente
+- historico de resposta se perde com facilidade
+
+## Escopo funcional
+- autenticacao com JWT
+- cadastro e listagem de tickets
+- atualizacao de status
+- resumo operacional de SLA
+- indicadores de criticidade e atraso
 
 ## Stack
 - Java 21
 - Spring Boot
 - Spring Security com JWT
 - Spring Data JPA
-- PostgreSQL
-- H2 para testes
+- PostgreSQL em producao
+- H2 em testes
 
-## Funcionalidades
-- login com usuario demo
-- cadastro e consulta de tickets
-- atualizacao de status
-- resumo operacional do SLA
-- seguranca com JWT para rotas protegidas
+## Regras de negocio
+- tickets novos comecam como `OPEN`
+- prioridade define urgencia operacional
+- tickets escalados aumentam o risco
+- tickets vencidos entram como atraso no dashboard
 
 ## Credenciais de demo
 - email: `demo@pulsedesk.dev`
 - senha: `pulse123`
 
 ## Variaveis de ambiente
-Use `.env.example` como base para configurar:
 - `DATABASE_URL`
 - `DATABASE_USERNAME`
 - `DATABASE_PASSWORD`
 - `JWT_SECRET`
 - `JWT_EXPIRATION_MINUTES`
 
-## Execucao local
+## Como executar
 1. suba o PostgreSQL com `docker compose up -d`
 2. ajuste as variaveis de ambiente
 3. execute `mvn spring-boot:run`
 
-## Testes
-Execute:
-
+## Como testar
 ```bash
 mvn test
 ```
 
-## Estrutura principal
+## Endpoints principais
+- `GET /api/health`
+- `POST /api/auth/login`
+- `GET /api/tickets`
+- `POST /api/tickets`
+- `PATCH /api/tickets/{id}/status`
+- `GET /api/dashboard`
+
+## Estrutura do projeto
 ```text
 src/main/java/com/jv/incidentflow
   auth/
@@ -59,20 +73,16 @@ src/main/java/com/jv/incidentflow
   user/
 ```
 
-## Endpoints
-- `GET /api/health`
-- `POST /api/auth/login`
-- `GET /api/tickets`
-- `POST /api/tickets`
-- `PATCH /api/tickets/{id}/status`
-- `GET /api/dashboard`
-
-## Observacoes de arquitetura
-- controllers sem regra de negocio
-- validacao com Bean Validation
+## Decisoes tecnicas
+- controllers finos
+- regras concentradas em services
+- DTOs para entrada e saida
 - tratamento centralizado de erros
-- usuarios demo persistidos em banco
+- persistencia relacional com UUID
 - rotas protegidas por JWT
 
-## Valor para LinkedIn
-Projeto forte para demonstrar backend com autenticao, persistencia, testes e dominio operacional.
+## Evolucao prevista
+- historico de mudancas por ticket
+- comentarios e atribuicao de responsavel
+- notificacoes de SLA
+- filtros por prioridade, status e prazo
