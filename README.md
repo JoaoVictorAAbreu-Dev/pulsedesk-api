@@ -1,54 +1,78 @@
 # PulseDesk API
 
-API backend para resolver a dor de chamados, incidentes e SLA. O objetivo e mostrar controle de fluxo operacional, rastreabilidade e prioridade em cenarios reais de suporte e engenharia.
+API backend para gestao de incidentes, tickets e SLA. O projeto foi desenhado para mostrar engenharia de software aplicada em um contexto real de suporte operacional.
 
-## Proposta
-- Registro e classificacao de incidentes
-- SLA por prioridade
-- Historico de mudancas e responsaveis
-- Base para auditoria e dashboards operacionais
-- Cadastro e consulta de tickets
-- Atualizacao de status
-- Resumo operacional do SLA
+## Problema que resolve
+- centraliza incidentes e chamados
+- classifica prioridade e risco
+- ajuda a acompanhar SLA e atraso
+- cria base para auditoria e dashboard operacional
 
 ## Stack
 - Java 21
 - Spring Boot
-- Spring Security
+- Spring Security com JWT
 - Spring Data JPA
 - PostgreSQL
 - H2 para testes
 
-## Ambiente
-Use `.env.example` como base para definir a conexao com PostgreSQL.
+## Funcionalidades
+- login com usuario demo
+- cadastro e consulta de tickets
+- atualizacao de status
+- resumo operacional do SLA
+- seguranca com JWT para rotas protegidas
+
+## Credenciais de demo
+- email: `demo@pulsedesk.dev`
+- senha: `pulse123`
+
+## Variaveis de ambiente
+Use `.env.example` como base para configurar:
+- `DATABASE_URL`
+- `DATABASE_USERNAME`
+- `DATABASE_PASSWORD`
+- `JWT_SECRET`
+- `JWT_EXPIRATION_MINUTES`
 
 ## Execucao local
-1. subir PostgreSQL com `docker compose up -d`
-2. exportar as variaveis de ambiente do `.env.example`
-3. iniciar a aplicacao com Maven Wrapper
+1. suba o PostgreSQL com `docker compose up -d`
+2. ajuste as variaveis de ambiente
+3. execute `mvn spring-boot:run`
 
-## Estrutura
+## Testes
+Execute:
+
+```bash
+mvn test
+```
+
+## Estrutura principal
 ```text
 src/main/java/com/jv/incidentflow
+  auth/
   config/
   dashboard/
   exception/
+  security/
   ticket/
+  user/
 ```
 
 ## Endpoints
 - `GET /api/health`
+- `POST /api/auth/login`
 - `GET /api/tickets`
 - `POST /api/tickets`
 - `PATCH /api/tickets/{id}/status`
 - `GET /api/dashboard`
 
-## Regras
-- tickets novos começam como `OPEN`
-- prioridade define urgencia operacional
-- tickets escalados aumentam risco no dashboard
-- SLA e prazo permitem identificar atraso
+## Observacoes de arquitetura
+- controllers sem regra de negocio
+- validacao com Bean Validation
+- tratamento centralizado de erros
+- usuarios demo persistidos em banco
+- rotas protegidas por JWT
 
-## LinkedIn
-Projeto forte para mostrar dominio de operacao, previsibilidade e organizacao de incidentes.
-
+## Valor para LinkedIn
+Projeto forte para demonstrar backend com autenticao, persistencia, testes e dominio operacional.
