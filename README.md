@@ -1,4 +1,4 @@
-# Incident Flow API
+# PulseDesk API
 
 API backend para resolver a dor de chamados, incidentes e SLA. O objetivo e mostrar controle de fluxo operacional, rastreabilidade e prioridade em cenarios reais de suporte e engenharia.
 
@@ -18,3 +18,4 @@ API backend para resolver a dor de chamados, incidentes e SLA. O objetivo e most
 
 ## LinkedIn
 Projeto forte para mostrar dominio de operacao, previsibilidade e organizacao de incidentes.
+

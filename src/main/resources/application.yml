@@ -1,3 +1,4 @@
 spring:
   application:
-    name: incident-flow-api
+    name: pulsedesk-api
+
