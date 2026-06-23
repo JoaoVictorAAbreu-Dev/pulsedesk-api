@@ -19,6 +19,14 @@ API backend para resolver a dor de chamados, incidentes e SLA. O objetivo e most
 - PostgreSQL
 - H2 para testes
 
+## Ambiente
+Use `.env.example` como base para definir a conexao com PostgreSQL.
+
+## Execucao local
+1. subir PostgreSQL com `docker compose up -d`
+2. exportar as variaveis de ambiente do `.env.example`
+3. iniciar a aplicacao com Maven Wrapper
+
 ## Estrutura
 ```text
 src/main/java/com/jv/incidentflow
